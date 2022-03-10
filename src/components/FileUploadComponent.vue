@@ -40,24 +40,21 @@
                 e.preventDefault();
                 let existingObj = this;
 
+                const config = {
+                    headers: 'content-type',
+                    headers:'multipart/form-data'
+                }
+
                 let data = new FormData();
                 data.append('file', this.file);
 
-               // console.log(data)
-                console.log( data.get('file') );
-
-                /*  axios.post('/upload', data, 
-                 {
-                    headers: {
-                      "Content-Type": "multipart/form-data"
-                    } 
-                 })
-                  .then(function (res){
-                      existingObj.success = res.data.success;
-                  })
-                  .catch(function (err){
-                      this.existingObj.output = err;
-                  });  */
+                axios.post('/upload', data, config)
+                    .then(function (res){
+                        this.existingObj.success = res.data.success;
+                    })
+                    .catch(function (err){
+                        this.existingObj.output = err;
+                    });
             }
 
         }
