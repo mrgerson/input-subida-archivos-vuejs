@@ -4,6 +4,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Laravel Vue JS File Upload Demo</div>
+                    <h1>{{resultado}}</h1>
 
                     <div class="card-body">
 
@@ -12,7 +13,7 @@
                         </div>
 
                         <form @submit="formSubmit" enctype="multipart/form-data">
-                            <input type="file" class="form-control" v-on:change="onChange">
+                            <input type="file" class="form-control" id="file" v-on:change="onChange">
                             <button class="btn btn-primary btn-block">Upload</button>
                         </form>
                     </div>
@@ -28,7 +29,8 @@
             return {
                 name: '',
                 file: '',
-                success: ''
+                success: '',
+                resultado: ''
             };
         },
 
@@ -46,6 +48,29 @@
                // console.log(data)
                 console.log( data.get('file') );
 
+
+
+                 let fileInput = document.getElementById('file');
+                 let filePath = fileInput.value;
+                 let allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
+                 if(!allowedExtensions.exec(filePath)){
+                    alert('cargue un archivo que tenga extensiones .jpeg/.jpg/.png/.gif only.');
+                    fileInput.value = '';
+                    return false;
+                 }else{
+                    //Image preview
+                    if (fileInput.files && fileInput.files[0]) {
+                        var reader = new FileReader();
+                         reader.onload = function(e) {
+                            //document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
+                           // console.log(e.target.result)
+                           console.log("archivo cargado con exito")
+                            
+                        }; 
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                }
+
                 /*  axios.post('/upload', data, 
                  {
                     headers: {
@@ -58,7 +83,8 @@
                   .catch(function (err){
                       this.existingObj.output = err;
                   });  */
-            }
+            },
+
 
         }
     }

@@ -3,7 +3,8 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>|
-      <router-link to="/form">formulario</router-link>
+      <router-link to="/form">formulario</router-link>|
+      <router-link to="/firma">firma</router-link>
     </nav>
     <router-view/>
   </div>
